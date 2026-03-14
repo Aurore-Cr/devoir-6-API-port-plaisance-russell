@@ -1,4 +1,4 @@
-/* ── Variables ──────────────────────────────────────── */
+/*  Variables  */
 :root {
   --primary: #1e3a5f;
   --primary-light: #2d5f8a;
@@ -17,7 +17,7 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* ── Reset ──────────────────────────────────────────── */
+/*  Reset  */
 *,
 *::before,
 *::after {
@@ -45,7 +45,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ── Navbar ─────────────────────────────────────────── */
+/* Navbar  */
 .navbar {
   background: var(--primary);
   padding: 0 2rem;
@@ -94,7 +94,7 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ── Layout ─────────────────────────────────────────── */
+/* Layout */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -133,7 +133,7 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* ── Cards ──────────────────────────────────────────── */
+/* Cards */
 .card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -160,7 +160,7 @@ a:hover {
   max-width: 600px;
 }
 
-/* ── Tables ─────────────────────────────────────────── */
+/* Tables */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -211,7 +211,7 @@ a:hover {
   font-style: italic;
 }
 
-/* ── Buttons ────────────────────────────────────────── */
+/*  Buttons  */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -263,7 +263,7 @@ a:hover {
   font-size: 0.82rem;
 }
 
-/* ── Forms ──────────────────────────────────────────── */
+/*  Forms */
 .form-group {
   margin-bottom: 1.2rem;
 }
@@ -318,7 +318,7 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* ── Alerts ─────────────────────────────────────────── */
+/* Alerts  */
 .alert {
   padding: 0.8rem 1rem;
   border-radius: var(--radius);
@@ -345,7 +345,7 @@ a:hover {
   border: 1px solid #bbf7d0;
 }
 
-/* ── Badges ─────────────────────────────────────────── */
+/*  Badges  */
 .badge {
   display: inline-block;
   padding: 0.2rem 0.6rem;
@@ -377,7 +377,7 @@ a:hover {
   color: #64748b;
 }
 
-/* ── Info list ──────────────────────────────────────── */
+/*  Info list  */
 .info-list {
   display: grid;
   grid-template-columns: 160px 1fr;
@@ -400,7 +400,7 @@ a:hover {
   margin-top: 0.2rem;
 }
 
-/* ── Dashboard ──────────────────────────────────────── */
+/*  Dashboard  */
 .dashboard-hero {
   background: linear-gradient(
     135deg,
@@ -468,7 +468,7 @@ a:hover {
   font-weight: 500;
 }
 
-/* ── Login ──────────────────────────────────────────── */
+/*  Login*/
 .login-page {
   background: linear-gradient(
     135deg,
@@ -560,7 +560,7 @@ a:hover {
   font-size: 0.9rem;
 }
 
-/* ── Footer ─────────────────────────────────────────── */
+/*Footer */
 .footer {
   text-align: center;
   padding: 1.2rem;
@@ -570,7 +570,7 @@ a:hover {
   background: var(--card-bg);
 }
 
-/* ── Responsive ─────────────────────────────────────── */
+/* Responsive  */
 @media (max-width: 768px) {
   .grid-2,
   .grid-3,

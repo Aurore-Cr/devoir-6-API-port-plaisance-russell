@@ -30,6 +30,52 @@ server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
+const mongoose = require("mongoose");
+
+mongoose.connection.once("open", async () => {
+  const Catway = require("../models/Catway");
+  const User = require("../models/User");
+  const Reservation = require("../models/Reservation");
+  const fs = require("fs");
+  const path = require("path");
+
+  try {
+    const count = await Catway.countDocuments();
+
+    if (count === 0) {
+      console.log("Base vide — import des données...");
+
+      const catways = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../data/catways.json")),
+      );
+      await Catway.insertMany(catways);
+      console.log(`${catways.length} catways importés`);
+
+      const reservations = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../data/reservations.json")),
+      );
+      for (const r of reservations) {
+        await new Reservation(r).save();
+      }
+      console.log(`${reservations.length} réservations importées`);
+
+      const usersRaw = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../data/users.json")),
+      );
+      for (const u of usersRaw) {
+        await new User(u).save();
+      }
+      console.log(`${usersRaw.length} utilisateur(s) importé(s)`);
+
+      console.log("Base initialisée avec succès !");
+    } else {
+      console.log(`Base déjà initialisée (${count} catways)`);
+    }
+  } catch (err) {
+    console.error("Erreur auto-seed :", err.message);
+  }
+});
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -38,12 +84,10 @@ function normalizePort(val) {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
     return val;
   }
 
   if (port >= 0) {
-    // port number
     return port;
   }
 
@@ -61,16 +105,15 @@ function onError(error) {
 
   const bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case "EACCES":
       console.error(bind + " requires elevated privileges");
       process.exit(1);
-      break;
+
     case "EADDRINUSE":
       console.error(bind + " is already in use");
       process.exit(1);
-      break;
+
     default:
       throw error;
   }
