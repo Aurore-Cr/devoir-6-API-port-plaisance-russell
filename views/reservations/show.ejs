@@ -1,0 +1,38 @@
+<%- include('../components/header', { title: 'Détail réservation' }) %>
+
+<div class="page-header">
+  <h1> Détail de la réservation</h1>
+  <div class="btn-group">
+    <a href="/catways/<%= catway.catwayNumber %>/reservations/<%= reservation._id %>/edit"
+       class="btn btn-warning">✏️ Modifier</a>
+    <a href="/catways/<%= catway.catwayNumber %>/reservations"
+       class="btn btn-secondary">← Retour</a>
+  </div>
+</div>
+
+<div class="card form-card">
+  <dl class="info-list">
+    <dt>Catway</dt>
+    <dd>
+      <strong>#<%= catway.catwayNumber %></strong>
+      <span class="badge badge-<%= catway.catwayType %>"><%= catway.catwayType %></span>
+    </dd>
+    <dt>Client</dt>
+    <dd><%= reservation.clientName %></dd>
+    <dt>Bateau</dt>
+    <dd><%= reservation.boatName %></dd>
+    <dt>Date de début</dt>
+    <dd><%= new Date(reservation.startDate).toLocaleDateString('fr-FR') %></dd>
+    <dt>Date de fin</dt>
+    <dd><%= new Date(reservation.endDate).toLocaleDateString('fr-FR') %></dd>
+  </dl>
+  <div class="form-actions">
+    <form action="/catways/<%= catway.catwayNumber %>/reservations/<%= reservation._id %>/delete"
+          method="POST"
+          onsubmit="return confirm('Supprimer cette réservation ?')">
+      <button type="submit" class="btn btn-danger"> Supprimer</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../components/footer') %>

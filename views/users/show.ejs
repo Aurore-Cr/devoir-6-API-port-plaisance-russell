@@ -1,0 +1,28 @@
+<%- include('../components/header', { title: foundUser.username }) %>
+
+<div class="page-header">
+  <h1> <%= foundUser.username %></h1>
+  <div class="btn-group">
+    <a href="/users/<%= foundUser.email %>/edit" class="btn btn-warning">Modifier</a>
+    <a href="/users" class="btn btn-secondary">← Retour</a>
+  </div>
+</div>
+
+<div class="card form-card">
+  <dl class="info-list">
+    <dt>Nom d'utilisateur</dt>
+    <dd><%= foundUser.username %></dd>
+    <dt>Adresse e-mail</dt>
+    <dd><%= foundUser.email %></dd>
+  </dl>
+  <% if (foundUser.email !== user.email) { %>
+  <div class="form-actions">
+    <form action="/users/<%= foundUser.email %>/delete" method="POST"
+          onsubmit="return confirm('Supprimer cet utilisateur ?')">
+      <button type="submit" class="btn btn-danger"> Supprimer</button>
+    </form>
+  </div>
+  <% } %>
+</div>
+
+<%- include('../components/footer') %>

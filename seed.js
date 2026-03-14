@@ -23,7 +23,9 @@ mongoose
     const reservations = JSON.parse(
       fs.readFileSync("./data/reservations.json"),
     );
-    await Reservation.insertMany(reservations);
+    for (const r of reservations) {
+      await new Reservation(r).save();
+    }
     console.log(` ${reservations.length} réservations importées`);
 
     const usersRaw = JSON.parse(fs.readFileSync("./data/users.json"));

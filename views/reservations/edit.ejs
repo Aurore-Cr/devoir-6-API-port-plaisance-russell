@@ -1,0 +1,44 @@
+<%- include('../components/header', { title: 'Modifier réservation' }) %>
+
+<div class="page-header">
+  <h1> Modifier la réservation</h1>
+  <a href="/catways/<%= catway.catwayNumber %>/reservations/<%= reservation._id %>"
+     class="btn btn-secondary">← Retour</a>
+</div>
+
+<% if (error) { %>
+  <div class="alert alert-error"> <%= error %></div>
+<% } %>
+
+<div class="card form-card">
+  <form action="/catways/<%= catway.catwayNumber %>/reservations/<%= reservation._id %>/edit"
+        method="POST">
+    <div class="form-group">
+      <label for="clientName">Nom du client *</label>
+      <input type="text" id="clientName" name="clientName"
+        value="<%= reservation.clientName %>" required>
+    </div>
+    <div class="form-group">
+      <label for="boatName">Nom du bateau *</label>
+      <input type="text" id="boatName" name="boatName"
+        value="<%= reservation.boatName %>" required>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Date de début *</label>
+      <input type="date" id="startDate" name="startDate"
+        value="<%= new Date(reservation.startDate).toISOString().split('T')[0] %>" required>
+    </div>
+    <div class="form-group">
+      <label for="endDate">Date de fin *</label>
+      <input type="date" id="endDate" name="endDate"
+        value="<%= new Date(reservation.endDate).toISOString().split('T')[0] %>" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <a href="/catways/<%= catway.catwayNumber %>/reservations/<%= reservation._id %>"
+         class="btn btn-secondary">Annuler</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../components/footer') %>

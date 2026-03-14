@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' — ' : '' %>Port Russell</title>
+  <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <% if (locals.user) { %>
+        <nav class="navbar">
+            <a href="/dashboard" class="nav-brand">⚓ Port Russell</a>
+            <div class="nav-links">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/catways">Catways</a>
+                <a href="/reservations">Réservations</a>
+                <a href="/users">Utilisateurs</a>
+                <a href="/docs">Documentation</a>
+                <a href="/logout" class="btn-logout">Déconnexion</a>
+            </div>
+        </nav>
+            <% } %>
+
+</body>
+</html>
+
