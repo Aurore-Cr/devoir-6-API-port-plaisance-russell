@@ -1,0 +1,161 @@
+<%- include('components/header', { title: 'Documentation API' }) %>
+
+<div class="page-header">
+  <h1> Documentation API — Port Russell</h1>
+  <% if (locals.user) { %>
+    <a href="/dashboard" class="btn btn-secondary">← Dashboard</a>
+  <% } else { %>
+    <a href="/" class="btn btn-secondary">← Accueil</a>
+  <% } %>
+</div>
+
+<div class="docs">
+
+  <div class="card docs-section">
+    <h2> Authentification</h2>
+    <p>L'API utilise des sessions. Connectez-vous via le formulaire pour obtenir un accès.</p>
+    <div class="route-list">
+      <div class="route">
+        <span class="method method-post">POST</span>
+        <span class="path">/login</span>
+        <span class="desc">Connexion — body : <code>{ email, password }</code></span>
+      </div>
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/logout</span>
+        <span class="desc">Déconnexion — redirige vers l'accueil</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card docs-section">
+    <h2>Catways</h2>
+    <p>Gestion des catways . Seul l'état peut être modifié après création.</p>
+    <div class="route-list">
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/catways</span>
+        <span class="desc">Liste tous les catways</span>
+      </div>
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/catways/:id</span>
+        <span class="desc">Détails d'un catway (id = numéro du catway)</span>
+      </div>
+      <div class="route">
+        <span class="method method-post">POST</span>
+        <span class="path">/catways</span>
+        <span class="desc">Créer — body : <code>{ catwayNumber, catwayType, catwayState }</code></span>
+      </div>
+      <div class="route">
+        <span class="method method-put">PUT</span>
+        <span class="path">/catways/:id</span>
+        <span class="desc">Modifier l'état — body : <code>{ catwayState }</code></span>
+      </div>
+      <div class="route">
+        <span class="method method-delete">DELETE</span>
+        <span class="path">/catways/:id</span>
+        <span class="desc">Supprimer un catway</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card docs-section">
+    <h2> Réservations</h2>
+    <p>Les réservations sont une sous-ressource des catways.</p>
+    <div class="route-list">
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/catways/:id/reservations</span>
+        <span class="desc">Liste les réservations d'un catway</span>
+      </div>
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/catways/:id/reservations/:idReservation</span>
+        <span class="desc">Détails d'une réservation</span>
+      </div>
+      <div class="route">
+        <span class="method method-post">POST</span>
+        <span class="path">/catways/:id/reservations</span>
+        <span class="desc">Créer — body : <code>{ clientName, boatName, startDate, endDate }</code></span>
+      </div>
+      <div class="route">
+        <span class="method method-put">PUT</span>
+        <span class="path">/catways/:id/reservations/:idReservation</span>
+        <span class="desc">Modifier une réservation</span>
+      </div>
+      <div class="route">
+        <span class="method method-delete">DELETE</span>
+        <span class="path">/catways/:id/reservations/:idReservation</span>
+        <span class="desc">Supprimer une réservation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card docs-section">
+    <h2> Utilisateurs</h2>
+    <p>Gestion des utilisateurs de la capitainerie. Accès authentifié requis.</p>
+    <div class="route-list">
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/users</span>
+        <span class="desc">Liste tous les utilisateurs</span>
+      </div>
+      <div class="route">
+        <span class="method method-get">GET</span>
+        <span class="path">/users/:email</span>
+        <span class="desc">Détails d'un utilisateur</span>
+      </div>
+      <div class="route">
+        <span class="method method-post">POST</span>
+        <span class="path">/users</span>
+        <span class="desc">Créer — body : <code>{ username, email, password }</code></span>
+      </div>
+      <div class="route">
+        <span class="method method-put">PUT</span>
+        <span class="path">/users/:email</span>
+        <span class="desc">Modifier un utilisateur</span>
+      </div>
+      <div class="route">
+        <span class="method method-delete">DELETE</span>
+        <span class="path">/users/:email</span>
+        <span class="desc">Supprimer un utilisateur</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card docs-section">
+    <h2> Modèles de données</h2>
+    <div class="grid-3">
+      <div>
+        <h3>Catway</h3>
+        <pre><code>{
+  catwayNumber: Number,
+  catwayType: "long"|"short",
+  catwayState: String
+}</code></pre>
+      </div>
+      <div>
+        <h3>Reservation</h3>
+        <pre><code>{
+  catwayNumber: Number,
+  clientName: String,
+  boatName: String,
+  startDate: Date,
+  endDate: Date
+}</code></pre>
+      </div>
+      <div>
+        <h3>User</h3>
+        <pre><code>{
+  username: String,
+  email: String,
+  password: String
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('components/footer') %>

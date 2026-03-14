@@ -1,0 +1,39 @@
+<%- include('../components/header', { title: 'Nouvelle réservation' }) %>
+
+<div class="page-header">
+  <h1> Nouvelle réservation — Catway #<%= catway.catwayNumber %></h1>
+  <a href="/catways/<%= catway.catwayNumber %>/reservations" class="btn btn-secondary">← Retour</a>
+</div>
+
+<% if (error) { %>
+  <div class="alert alert-error"> <%= error %></div>
+<% } %>
+
+<div class="card form-card">
+  <form action="/catways/<%= catway.catwayNumber %>/reservations" method="POST">
+    <div class="form-group">
+      <label for="clientName">Nom du client *</label>
+      <input type="text" id="clientName" name="clientName"
+        placeholder="Prénom Nom" required>
+    </div>
+    <div class="form-group">
+      <label for="boatName">Nom du bateau *</label>
+      <input type="text" id="boatName" name="boatName"
+        placeholder="Nom du bateau" required>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Date de début *</label>
+      <input type="date" id="startDate" name="startDate" required>
+    </div>
+    <div class="form-group">
+      <label for="endDate">Date de fin *</label>
+      <input type="date" id="endDate" name="endDate" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Créer la réservation</button>
+      <a href="/catways/<%= catway.catwayNumber %>/reservations" class="btn btn-secondary">Annuler</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../components/footer') %>

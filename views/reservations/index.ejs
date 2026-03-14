@@ -1,0 +1,57 @@
+<%- include('../components/header', { title: 'Réservations — Catway #' + catway.catwayNumber }) %>
+
+<div class="page-header">
+  <div>
+    <h1> Réservations — Catway #<%= catway.catwayNumber %></h1>
+    <p class="text-muted">
+      Type : <span class="badge badge-<%= catway.catwayType %>"><%= catway.catwayType %></span>
+    </p>
+  </div>
+  <div class="btn-group">
+    <a href="/catways/<%= catway.catwayNumber %>/reservations/new"
+       class="btn btn-primary">+ Nouvelle réservation</a>
+    <a href="/catways/<%= catway.catwayNumber %>" class="btn btn-secondary">← Catway</a>
+  </div>
+</div>
+
+<div class="card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (reservations.length === 0) { %>
+        <tr>
+          <td colspan="5" class="empty-state">Aucune réservation pour ce catway.</td>
+        </tr>
+      <% } %>
+      <% reservations.forEach(r => { %>
+      <tr>
+        <td><%= r.clientName %></td>
+        <td><%= r.boatName %></td>
+        <td><%= new Date(r.startDate).toLocaleDateString('fr-FR') %></td>
+        <td><%= new Date(r.endDate).toLocaleDateString('fr-FR') %></td>
+        <td class="actions">
+          <a href="/catways/<%= catway.catwayNumber %>/reservations/<%= r._id %>"
+             class="btn btn-sm btn-secondary">Détails</a>
+          <a href="/catways/<%= catway.catwayNumber %>/reservations/<%= r._id %>/edit"
+             class="btn btn-sm btn-warning">Modifier</a>
+          <form action="/catways/<%= catway.catwayNumber %>/reservations/<%= r._id %>/delete"
+                method="POST" style="display:inline"
+                onsubmit="return confirm('Supprimer cette réservation ?')">
+            <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../components/footer') %>

@@ -1,0 +1,51 @@
+<%- include('../components/header', { title: 'Utilisateurs' }) %>
+
+<div class="page-header">
+  <h1> Utilisateurs</h1>
+  <a href="/users/new" class="btn btn-primary">+ Nouvel utilisateur</a>
+</div>
+
+<% if (locals.error) { %>
+  <div class="alert alert-error"> <%= error %></div>
+<% } %>
+
+<div class="card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom d'utilisateur</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (users.length === 0) { %>
+        <tr><td colspan="3" class="empty-state">Aucun utilisateur enregistré.</td></tr>
+      <% } %>
+      <% users.forEach(u => { %>
+      <tr>
+        <td>
+          <strong><%= u.username %></strong>
+          <% if (u.email === user.email) { %>
+            <span class="badge" style="background:#e2e8f0;color:#64748b;margin-left:6px">Vous</span>
+          <% } %>
+        </td>
+        <td><%= u.email %></td>
+        <td class="actions">
+          <a href="/users/<%= u.email %>" class="btn btn-sm btn-secondary">Détails</a>
+          <a href="/users/<%= u.email %>/edit" class="btn btn-sm btn-warning">Modifier</a>
+          <% if (u.email !== user.email) { %>
+          <form action="/users/<%= u.email %>/delete" method="POST"
+                style="display:inline"
+                onsubmit="return confirm('Supprimer l\'utilisateur <%= u.username %> ?')">
+            <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+          </form>
+          <% } %>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../components/footer') %>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Port Russell — Connexion</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+  <div class="login-wrapper">
+
+    <!-- Présentation -->
+    <div class="login-presentation">
+      <div class="presentation-logo">⚓</div>
+      <h1>Port de Plaisance<br><span>Russell</span></h1>
+      <p>Application de gestion des réservations de catways pour la capitainerie du port de Russell.</p>
+      <ul class="feature-list">
+        <li>Gestion des catways</li>
+        <li>Réservations en temps réel</li>
+        <li>Gestion des utilisateurs</li>
+        <li>Documentation API intégrée</li>
+      </ul>
+    </div>
+
+    <!-- Formulaire connexion -->
+    <div class="login-card">
+      <h2>Connexion</h2>
+      <p class="login-subtitle">Accès réservé à la capitainerie</p>
+
+      <% if (error) { %>
+        <div class="alert alert-error"> <%= error %></div>
+      <% } %>
+
+      <form action="/login" method="POST" class="login-form">
+        <div class="form-group">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email"
+            placeholder="votre@email.com" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password"
+            placeholder="••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          Se connecter →
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <a href="/docs">Consulter la documentation de l'API</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

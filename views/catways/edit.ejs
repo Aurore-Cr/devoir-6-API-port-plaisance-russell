@@ -1,0 +1,38 @@
+<%- include('../components/header', { title: 'Modifier catway #' + catway.catwayNumber }) %>
+
+<div class="page-header">
+  <h1> Modifier catway #<%= catway.catwayNumber %></h1>
+  <a href="/catways/<%= catway.catwayNumber %>" class="btn btn-secondary">← Retour</a>
+</div>
+
+<% if (error) { %>
+  <div class="alert alert-error"> <%= error %></div>
+<% } %>
+
+<div class="card form-card">
+  <div class="alert alert-info">
+     Seul l'<strong>état</strong> du catway peut être modifié.
+    Le numéro et le type sont fixes.
+  </div>
+  <form action="/catways/<%= catway.catwayNumber %>/edit" method="POST">
+    <div class="form-group">
+      <label>Numéro</label>
+      <input type="text" value="#<%= catway.catwayNumber %>" disabled class="input-disabled">
+    </div>
+    <div class="form-group">
+      <label>Type</label>
+      <input type="text" value="<%= catway.catwayType %>" disabled class="input-disabled">
+    </div>
+    <div class="form-group">
+      <label for="catwayState">État *</label>
+      <textarea id="catwayState" name="catwayState"
+        rows="3" required><%= catway.catwayState %></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <a href="/catways/<%= catway.catwayNumber %>" class="btn btn-secondary">Annuler</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../components/footer') %>

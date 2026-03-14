@@ -1,0 +1,46 @@
+<%- include('../components/header', { title: 'Catways' }) %>
+
+<div class="page-header">
+  <h1> Catways</h1>
+  <a href="/catways/new" class="btn btn-primary">+ Nouveau catway</a>
+</div>
+
+<% if (locals.error) { %>
+  <div class="alert alert-error"> <%= error %></div>
+<% } %>
+
+<div class="card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>N°</th>
+        <th>Type</th>
+        <th>État</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (catways.length === 0) { %>
+        <tr><td colspan="4" class="empty-state">Aucun catway enregistré.</td></tr>
+      <% } %>
+      <% catways.forEach(c => { %>
+      <tr>
+        <td><strong>#<%= c.catwayNumber %></strong></td>
+        <td><span class="badge badge-<%= c.catwayType %>"><%= c.catwayType %></span></td>
+        <td class="state-cell"><%= c.catwayState %></td>
+        <td class="actions">
+          <a href="/catways/<%= c.catwayNumber %>" class="btn btn-sm btn-secondary">Détails</a>
+          <a href="/catways/<%= c.catwayNumber %>/edit" class="btn btn-sm btn-warning">Modifier</a>
+          <form action="/catways/<%= c.catwayNumber %>/delete" method="POST"
+                style="display:inline"
+                onsubmit="return confirm('Supprimer le catway #<%= c.catwayNumber %> ?')">
+            <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../components/footer') %>
